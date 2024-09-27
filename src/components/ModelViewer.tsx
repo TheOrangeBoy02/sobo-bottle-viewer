@@ -102,7 +102,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({ selectedModel }) => {
     };
   }, [selectedModel]);
 
-  return <div ref={mountRef} className="flex-1 h-[80vh] bg-black shadow-lg rounded-md" />;
+  return <div ref={mountRef} className="flex-1 h-100 bg-black shadow-lg rounded-md" />;
 };
 
 export default ModelViewer;
