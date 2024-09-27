@@ -14,7 +14,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
   return (
     <div className="flex flex-col w-1/4 p-4">
       <img className="w-28 m-2" src='sobo-white-logo.png'></img>
-      <h2 className="mb-2 text-lg font-semibold">Pick your favorite SOBO</h2>
+      <h2 className="mb-2 text-lg font-semibold">Pick your favorite SOBO drinks</h2>
       <input
         type="file"
         onChange={onFileChange}
