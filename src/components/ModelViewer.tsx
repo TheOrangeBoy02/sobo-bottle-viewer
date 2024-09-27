@@ -44,10 +44,14 @@ const ModelViewer: React.FC<ModelViewerProps> = ({ selectedModel }) => {
       loader.load(
         objectURL,
         (gltf) => {
+          // Clear existing scene objects if necessary
           scene.clear();
+
+          // Add the loaded model to the scene
           scene.add(gltf.scene);
           URL.revokeObjectURL(objectURL);
 
+          // Center and scale the model
           const box = new THREE.Box3().setFromObject(gltf.scene);
           const center = box.getCenter(new THREE.Vector3());
           const size = box.getSize(new THREE.Vector3());
@@ -55,6 +59,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({ selectedModel }) => {
           const maxDim = Math.max(size.x, size.y, size.z);
           const scale = 2 / maxDim;
           gltf.scene.scale.multiplyScalar(scale);
+
           gltf.scene.position.sub(center.multiplyScalar(scale));
           camera.position.z = Math.max(size.x, size.y) * 2;
 
@@ -66,6 +71,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({ selectedModel }) => {
         }
       );
     } else {
+      // Render a default cube if no model is loaded
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
       const cube = new THREE.Mesh(geometry, material);
@@ -96,12 +102,7 @@ const ModelViewer: React.FC<ModelViewerProps> = ({ selectedModel }) => {
     };
   }, [selectedModel]);
 
-  return (
-    <div
-      ref={mountRef}
-      className="flex-1 h-100 bg-black shadow-lg rounded-md"
-    />
-  );
+  return <div ref={mountRef} className="flex-1 h-[80vh] bg-black shadow-lg rounded-md" />;
 };
 
 export default ModelViewer;
